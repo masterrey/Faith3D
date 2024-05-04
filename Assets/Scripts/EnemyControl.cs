@@ -10,6 +10,8 @@ public class EnemyControl : MonoBehaviour
     public GameObject target;
     public float distance = 5.0f;
     public AudioSource audioSource;
+
+    public int lives = 3;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,6 +43,20 @@ public class EnemyControl : MonoBehaviour
             audioSource.Play();
 
            target = other.gameObject;
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Colision");  
+        if (collision.gameObject.tag == "Sacred")
+        {
+           
+            audioSource.pitch = Random.Range(0.2f, 0.6f);
+            audioSource.Play();
+
+            Destroy(gameObject, 1f);
+          
         }
     }
 
